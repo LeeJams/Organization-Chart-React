@@ -1,27 +1,23 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./style.css"; // Import your CSS styles here
+import classes from "./OrganizationChart.module.css";
 
 const OrganizationChart = ({ data, onClickNode }) => {
   const [orgData, setOrgData] = useState({});
 
-  const extendKey = (orgData) => {
+  const init = useCallback((orgData) => {
     orgData.extend = true;
     if (Array.isArray(orgData.children)) {
       orgData.children.forEach((c) => {
-        extendKey(c);
+        init(c);
       });
     }
     setOrgData(orgData);
-  };
+  }, []);
 
   const setToggleExtend = (orgData, extend) => {
     orgData.extend = extend;
-    if (Array.isArray(orgData.children)) {
-      orgData.children.forEach((c) => {
-        setToggleExtend(c, extend);
-      });
-    }
-    forceUpdate();
+    setOrgData({ ...orgData });
   };
 
   const isChildren = () => {
@@ -29,73 +25,76 @@ const OrganizationChart = ({ data, onClickNode }) => {
   };
 
   const isMember = () => {
+    console.log(Array.isArray(orgData.member) && orgData.member.length);
     return Array.isArray(orgData.member) && orgData.member.length;
   };
 
-  const forceUpdate = () => {
-    // A simple function that forces a component update
-    setOrgData({ ...orgData });
-  };
-
   useEffect(() => {
-    extendKey(data);
-  }, [data]);
+    init(data);
+  }, [data, init]);
 
   return (
-    <table style={{ display: orgData.title ? "block" : "none" }}>
-      <tr>
-        <td
-          colSpan={
-            Array.isArray(orgData.children) ? orgData.children.length * 2 : 1
-          }
-          className={`${isChildren() ? "parentLevel" : ""} ${
-            isChildren() && orgData.extend ? "extend" : ""
-          }`}
-        >
-          <div className="node">
-            <div className="container" onClick={() => onClickNode(orgData)}>
-              <div className={`title ${orgData.titleClass || ""}`}>
-                {orgData.title}
-              </div>
+    <table
+      className={classes.table}
+      style={{ display: orgData.title ? "block" : "none" }}
+    >
+      <tbody>
+        <tr>
+          <td
+            colSpan={
+              Array.isArray(orgData.children) ? orgData.children.length * 2 : 1
+            }
+            className={`${isChildren() ? "parentLevel" : ""} ${
+              isChildren() && orgData.extend ? classes.extend : ""
+            }
+          ${classes.td}`}
+          >
+            <div className={classes.node}>
               <div
-                className={`content ${
-                  isMember() ? orgData.contentClass || "" : ""
-                }`}
+                className={classes.container}
+                onClick={() => onClickNode(orgData)}
               >
-                {isMember() &&
-                  orgData.member.map((member, index) => (
-                    <div
-                      className="content-item"
-                      key={index}
-                      onClick={() => onClickNode(member)}
-                    >
-                      <div className="item-box">
-                        <p className="item-title">{member.name}</p>
-                        <p className="item-add">{member.add}</p>
+                <div className={`${classes.title} ${orgData.titleClass || ""}`}>
+                  {orgData.title}
+                </div>
+                {isMember() && (
+                  <div
+                    className={`${classes.content} ${
+                      isMember() ? orgData.contentClass || "" : ""
+                    }`}
+                  >
+                    {orgData.member.map((member, index) => (
+                      <div className={classes.contentItem} key={index}>
+                        <div className={classes.itemBox}>
+                          <p className={classes.itemTitle}>{member.name}</p>
+                          <p className={classes.itemAdd}>{member.add}</p>
+                        </div>
+                        <div className={classes.avat}>
+                          {member.image_url && <img src={member.image_url} />}
+                        </div>
                       </div>
-                      <div className="avat">
-                        {member.image_url && <img src={member.image_url} />}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
-          </div>
-          <div
-            className="extend_arrow"
-            style={{ display: isChildren() ? "block" : "none" }}
-            onClick={() => setToggleExtend(orgData, !orgData.extend)}
-          ></div>
-        </td>
-      </tr>
-      <tr style={{ visibility: orgData.extend ? "visible" : "hidden" }}>
-        {isChildren() &&
-          orgData.children.map((children, index) => (
-            <td key={index} colSpan={2} className="childLevel">
-              <OrganizationChart data={children} onClickNode={onClickNode} />
-            </td>
-          ))}
-      </tr>
+            <div
+              className={classes.extendArrow}
+              style={{ display: isChildren() ? "block" : "none" }}
+              onClick={() => setToggleExtend(orgData, !orgData.extend)}
+            ></div>
+          </td>
+        </tr>
+        <tr>
+          {isChildren() &&
+            orgData.extend &&
+            orgData.children.map((children, index) => (
+              <td key={index} colSpan={2} className={classes.childLevel}>
+                <OrganizationChart data={children} onClickNode={onClickNode} />
+              </td>
+            ))}
+        </tr>
+      </tbody>
     </table>
   );
 };
