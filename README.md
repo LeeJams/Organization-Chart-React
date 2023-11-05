@@ -18,7 +18,7 @@ npm i organization-chart-react --save
 in template:
 
 ```html
-<OrganizationChart :data="orgData" @click-node="clickNode" />
+<OrganizationChart data="{orgData}" onClickNode="{onClickNode}" />
 ```
 
 in script:
@@ -27,18 +27,23 @@ in script:
 import OrganizationChart from "organization-chart-react";
 import "organization-chart-react/dist/style.css";
 
-export default {
-    components: {
-        OrganizationChart
-    },
-    data() {
-        return {
-            orgData: {
-                ...
-            }
-        }
-    },
+function App() {
+
+  const [orgData, setOrgData] = useState({
     ...
+  });
+  const onClickNode = (orgData) => {
+      ...
+  }
+
+  return (
+    <>
+      <OrganizationChart
+        data={orgData}
+        onClickNode={onClickNode}
+      />
+    </>
+  );
 }
 ```
 
@@ -60,10 +65,10 @@ If click on the member, you can get the data of the member.
 Component data to support those field：
 
 ```text
-- title[String] to display a oraganization title
-- member[String] to display a oraganization member
+- title[String] to display a organization title
+- member[String] to display a organization member
   - name[String] to display a organization member name
-  - add[String] to display a organization member additonal info
+  - add[String] to display a organization member additional info
   - image_url[String] to display a organization member image
 - children[Array] to display a organization children
 - titleClass[String, Array<String>] to input organization title class
