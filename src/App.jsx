@@ -1,87 +1,114 @@
 import { useState } from "react";
-import "./App.css";
 import OrganizationChart from "./OrganizationChart";
+import "./App.css";
 
 function App() {
   const [orgData, setOrgData] = useState({
     title: "CEO",
     member: [
       {
-        name: "Member 1",
-        add: "Member 1 Address",
-        image_url: "https://picsum.photos/seed/picsum/200/300",
-      },
-      {
-        name: "Member 2",
-        add: "Member 2 Address",
-        image_url: "https://picsum.photos/seed/picsum/200/300",
-      },
-      {
-        name: "Member 3",
-        add: "Member 3 Address",
-        image_url: "https://picsum.photos/seed/picsum/200/300",
+        name: "Oliver",
+        image_url:
+          "https://github.com/LeeJams/LeeJams.github.io/blob/master/assets/img/user.jpg?raw=true",
       },
     ],
     children: [
       {
-        title: "Manager 1",
+        title: "MANAGEMENT",
         member: [
           {
-            name: "Member 4",
-            add: "Member 4 Address",
-            image_url: "https://picsum.photos/seed/picsum/200/300",
+            name: "Jake",
+            add: "Junior Staff",
+            image_url:
+              "https://github.com/LeeJams/LeeJams.github.io/blob/master/assets/img/user.jpg?raw=true",
           },
           {
-            name: "Member 5",
-            add: "Member 5 Address",
-            image_url: "https://picsum.photos/seed/picsum/200/300",
+            name: "Noah",
+            add: "Senior Staff",
+            image_url:
+              "https://github.com/LeeJams/LeeJams.github.io/blob/master/assets/img/user.jpg?raw=true",
           },
           {
-            name: "Member 6",
-            add: "Member 6 Address",
-            image_url: "https://picsum.photos/seed/picsum/200/300",
+            name: "James",
+            add: "Senior Manager",
+            image_url:
+              "https://github.com/LeeJams/LeeJams.github.io/blob/master/assets/img/user.jpg?raw=true",
+          },
+        ],
+      },
+      {
+        title: "DEVELOPMENT",
+        member: [
+          {
+            name: "Emma",
+            add: "CTO",
+            image_url:
+              "https://github.com/LeeJams/LeeJams.github.io/blob/master/assets/img/user.jpg?raw=true",
           },
         ],
         children: [
           {
-            title: "Manager 2",
+            title: "FRONTEND",
+            titleClass: "frontend-title",
+            contentClass: "frontend-content",
             member: [
               {
-                name: "Member 7",
-                add: "Member 7 Address",
-                image_url: "https://picsum.photos/seed/picsum/200/300",
+                name: "David",
+                add: "Senior Staff",
               },
               {
-                name: "Member 8",
-                add: "Member 8 Address",
-                image_url: "https://picsum.photos/seed/picsum/200/300",
+                name: "Ava",
+                add: "Senior Staff",
               },
               {
-                name: "Member 9",
-                add: "Member 9 Address",
-                image_url: "https://picsum.photos/seed/picsum/200/300",
+                name: "Sophia",
+                add: "Senior Staff",
               },
             ],
           },
           {
-            title: "Manager 3",
+            title: "BACKEND",
+            titleClass: "backend-title",
+            contentClass: "backend-content",
             member: [
               {
-                name: "Member 10",
-                add: "Member 10 Address",
-                image_url: "https://picsum.photos/seed/picsum/200/300",
+                name: "Kyle",
+                add: "Senior Staff",
               },
               {
-                name: "Member 11",
-                add: "Member11 Address",
-                image_url: "https://picsum.photos/seed/picsum/200/300",
+                name: "Richard",
+                add: "Senior Staff",
+              },
+              {
+                name: "Daniel",
+                add: "Senior Staff",
               },
             ],
           },
         ],
       },
       {
-        title: "Manager 5",
+        title: "DESIGN",
+        member: [
+          {
+            name: "Jacob",
+            add: "Senior Staff",
+          },
+        ],
+      },
+      {
+        title: "MARKETING",
+      },
+      {
+        title: "SALES",
+        children: [
+          {
+            title: "SALES A TEAM",
+          },
+          {
+            title: "SALES B TEAM",
+          },
+        ],
       },
     ],
   });
@@ -94,6 +121,22 @@ function App() {
           console.log(orgData);
         }}
       />
+      <footer className="foot">
+        <p>
+          Blog
+          <a href="https://leejams.github.io/" target="_blank" rel="noreferrer">
+            LeeJam
+          </a>
+          Github
+          <a
+            href="https://github.com/LeeJams/Organization-Chart-React"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Organization-Chart-React
+          </a>
+        </p>
+      </footer>
     </>
   );
 }

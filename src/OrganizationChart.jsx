@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import "./style.css"; // Import your CSS styles here
-import classes from "./OrganizationChart.module.css";
+import "./OrganizationChart.css";
 
 const OrganizationChart = ({ data, onClickNode }) => {
   const [orgData, setOrgData] = useState({});
@@ -25,7 +24,6 @@ const OrganizationChart = ({ data, onClickNode }) => {
   };
 
   const isMember = () => {
-    console.log(Array.isArray(orgData.member) && orgData.member.length);
     return Array.isArray(orgData.member) && orgData.member.length;
   };
 
@@ -35,7 +33,7 @@ const OrganizationChart = ({ data, onClickNode }) => {
 
   return (
     <table
-      className={classes.table}
+      className="org-table"
       style={{ display: orgData.title ? "block" : "none" }}
     >
       <tbody>
@@ -44,34 +42,31 @@ const OrganizationChart = ({ data, onClickNode }) => {
             colSpan={
               Array.isArray(orgData.children) ? orgData.children.length * 2 : 1
             }
-            className={`${isChildren() ? "parentLevel" : ""} ${
-              isChildren() && orgData.extend ? classes.extend : ""
-            }
-          ${classes.td}`}
+            className={`${isChildren() || "org-parent-level"} ${
+              isChildren() && orgData.extend ? "org-extend" : ""
+            }`}
           >
-            <div className={classes.node}>
+            <div className="org-node">
               <div
-                className={classes.container}
+                className="org-container"
                 onClick={() => onClickNode(orgData)}
               >
-                <div className={`${classes.title} ${orgData.titleClass || ""}`}>
+                <div className={`org-title ${orgData.titleClass || ""}`}>
                   {orgData.title}
                 </div>
                 {isMember() && (
-                  <div
-                    className={`${classes.content} ${
-                      isMember() ? orgData.contentClass || "" : ""
-                    }`}
-                  >
+                  <div className={`org-content ${orgData.contentClass || ""}`}>
                     {orgData.member.map((member, index) => (
-                      <div className={classes.contentItem} key={index}>
-                        <div className={classes.itemBox}>
-                          <p className={classes.itemTitle}>{member.name}</p>
-                          <p className={classes.itemAdd}>{member.add}</p>
+                      <div className="org-content-item" key={index}>
+                        <div className="item-box">
+                          <p className="item-title">{member.name}</p>
+                          <p className="item-add">{member.add}</p>
                         </div>
-                        <div className={classes.avat}>
-                          {member.image_url && <img src={member.image_url} />}
-                        </div>
+                        {member.image_url && (
+                          <div className="avat">
+                            {member.image_url && <img src={member.image_url} />}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -79,7 +74,7 @@ const OrganizationChart = ({ data, onClickNode }) => {
               </div>
             </div>
             <div
-              className={classes.extendArrow}
+              className="org-extend-arrow"
               style={{ display: isChildren() ? "block" : "none" }}
               onClick={() => setToggleExtend(orgData, !orgData.extend)}
             ></div>
@@ -89,7 +84,7 @@ const OrganizationChart = ({ data, onClickNode }) => {
           {isChildren() &&
             orgData.extend &&
             orgData.children.map((children, index) => (
-              <td key={index} colSpan={2} className={classes.childLevel}>
+              <td key={index} colSpan={2} className="org-child-level">
                 <OrganizationChart data={children} onClickNode={onClickNode} />
               </td>
             ))}

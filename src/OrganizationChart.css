@@ -1,23 +1,23 @@
-.table {
+.org-table {
   border-collapse: separate !important;
   border-spacing: 0 !important;
 }
 
-.td {
+.org-table td {
   position: relative;
   vertical-align: top;
   padding: 0 0 50px 0;
   text-align: center;
 }
 
-.node {
+.org-node {
   position: relative;
   display: inline-block;
   margin: 0 1em;
   box-sizing: border-box;
 }
 
-.node .container {
+.org-node .org-container {
   position: relative;
   display: inline-block;
   z-index: 2;
@@ -25,8 +25,7 @@
   min-width: 150px;
 }
 
-
-.title {
+.org-title {
   font-weight: 700;
   width: 100%;
   border: 1px solid #00000000;
@@ -36,7 +35,7 @@
   white-space: pre;
 }
 
-.content {
+.org-content {
   margin-top: 3px;
   width: 100%;
   border: 1px solid #ccc;
@@ -46,7 +45,7 @@
   text-align: left;
 }
 
-.content .contentItem {
+.org-content .org-content-item {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -54,26 +53,26 @@
   border-bottom: 1px solid #e7e7e7;
 }
 
-.content .contentItem:last-child {
+.org-content .org-content-item:last-child {
   border-bottom: none;
 }
 
-.contentItem .itemBox {
+.org-content-item .item-box {
   flex: 1;
 }
 
-.contentItem .itemBox .itemTitle {
+.org-content-item .item-box .item-title {
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
 }
 
-.contentItem .itemBox .itemAdd {
+.org-content-item .item-box .item-add {
   margin: 0;
   font-size: 0.8rem;
 }
 
-.contentItem .avat {
+.org-content-item .avat {
   display: block;
   width: 3em;
   height: 3em;
@@ -85,13 +84,12 @@
   margin-left: 5px;
 }
 
-.contentItem .avat img {
+.org-content-item .avat img {
   width: 100%;
   height: 100%;
 }
 
-
-.childLevel::before {
+.org-child-level::before {
   content: "";
   position: absolute;
   left: 50%;
@@ -101,7 +99,7 @@
   transform: translate3d(-1px, 0, 0);
 }
 
-.childLevel::after {
+.org-child-level::after {
   content: "";
   position: absolute;
   left: 0;
@@ -110,12 +108,12 @@
   border-top: 2px solid #ccc;
 }
 
-.childLevel:first-child:before,
-.childLevel:last-child:before {
+.org-child-level:first-child:before,
+.org-child-level:last-child:before {
   display: none;
 }
 
-.childLevel:first-child:after {
+.org-child-level:first-child:after {
   left: 50%;
   height: 13px;
   border: 2px solid;
@@ -123,7 +121,7 @@
   transform: translate3d(1px, 0, 0);
 }
 
-.childLevel:last-child:after {
+.org-child-level:last-child:after {
   right: 50%;
   height: 13px;
   border: 2px solid;
@@ -131,30 +129,29 @@
   transform: translate3d(-1px, 0, 0);
 }
 
-.childLevel:first-child.childLevel:last-child::after {
+.org-child-level:first-child.org-child-level:last-child::after {
   left: auto;
   border-radius: 0;
   border-color: transparent #ccc transparent transparent;
   transform: translate3d(1px, 0, 0);
 }
 
-.extend .extendArrow:before {
+.org-extend .org-extend-arrow:before {
   transform: rotateZ(-45deg);
 }
 
-.extend::after {
+.org-extend::after {
   content: "";
   position: absolute;
   left: 50%;
   bottom: 13px;
   height: 17px;
   border-left: 2px solid #ccc;
-  transform: translate3d(-1px, 0, 0);
 }
 
-.extendArrow {
+.org-extend-arrow {
   position: absolute;
-  left: 50%;
+  left: 50.2%;
   bottom: 22px;
   width: 10px;
   height: 10px;
@@ -163,7 +160,7 @@
   cursor: pointer;
 }
 
-.extendArrow:before {
+.org-extend-arrow:before {
   content: "";
   display: block;
   width: 100%;
@@ -176,6 +173,6 @@
   transition: transform ease 300ms;
 }
 
-.extendArrow:hover:before {
+.org-extend-arrow:hover:before {
   border-color: #333 #333 transparent transparent;
 }
