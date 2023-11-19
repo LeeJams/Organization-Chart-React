@@ -1,13 +1,49 @@
 {
   "name": "organization-chart-react",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A react component to display organization chart",
+  "author": "LeeJams [woals214@gmail.com]",
   "type": "module",
+  "main": "./dist/organization-chart-react.umd.cjs",
+  "module": "./dist/organization-chart-react.js",
+  "exports": {
+    ".": {
+      "import": "./dist/organization-chart-react.js",
+      "require": "./dist/organization-chart-react.umd.cjs"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "types": "./dist/index.jsx",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeeJams/Organization-Chart-React"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "react component",
+    "react organization chart",
+    "react organization",
+    "react chart",
+    "react org",
+    "organization",
+    "chart",
+    "org",
+    "organization chart",
+    "react org chart",
+    "react org"
+  ],
+  "license": "MIT",
+  "homepage": "https://leejams.github.io/Organization-Chart-React/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "build-bundle": "vite build && vue --emitDeclarationOnly"
   },
   "dependencies": {
     "react": "^18.2.0",

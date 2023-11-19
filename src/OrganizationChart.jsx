@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import "./OrganizationChart.css";
 
-const OrganizationChart = ({ data, onClickNode }) => {
+export default function OrganizationChart({ data, onClickNode }) {
   const [orgData, setOrgData] = useState({});
 
   const init = useCallback((orgData) => {
@@ -92,6 +92,4 @@ const OrganizationChart = ({ data, onClickNode }) => {
       </tbody>
     </table>
   );
-};
-
-export default OrganizationChart;
+}
