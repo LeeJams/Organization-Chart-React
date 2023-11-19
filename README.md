@@ -32,7 +32,7 @@ function App() {
   const [orgData, setOrgData] = useState({
     ...
   });
-  const onClickNode = (orgData) => {
+  const onClickNode = (data) => {
       ...
   }
 
@@ -54,8 +54,7 @@ function App() {
 ```text
 Click on the node triggered, receive the current node data as a parameter
 
-If click on the title, you can get all the data of the node.
-If click on the member, you can get the data of the member.
+If click on the node, you can get all the data of the node.
 ```
 
 ## Prop
