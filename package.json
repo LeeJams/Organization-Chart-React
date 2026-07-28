@@ -1,6 +1,6 @@
 {
   "name": "organization-chart-react",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A lightweight, interactive organization chart component for React with collapsible nodes, TypeScript types, custom renderers, and selection events",
   "author": "LeeJams [woals214@gmail.com]",
   "type": "module",
@@ -33,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LeeJams/Organization-Chart-React"
+    "url": "git+https://github.com/LeeJams/Organization-Chart-React.git"
   },
   "files": [
     "dist"
