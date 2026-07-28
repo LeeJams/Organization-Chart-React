@@ -1,0 +1,44 @@
+# Organization Chart React
+
+> Organization Chart React (`organization-chart-react`) is a lightweight, interactive React component for displaying hierarchical team and company structures.
+
+The package supports collapsible branches, optional members, generated TypeScript definitions, custom React renderers, and typed selection payloads. It supports React and React DOM 18.2 through 19 and is available under the MIT license.
+
+## Primary links
+
+- [Live demo and overview](https://leejams.github.io/Organization-Chart-React/)
+- [Full documentation and source](https://github.com/LeeJams/Organization-Chart-React)
+- [npm package](https://www.npmjs.com/package/organization-chart-react)
+- [README](https://raw.githubusercontent.com/LeeJams/Organization-Chart-React/main/README.md)
+
+## Installation
+
+```bash
+npm install organization-chart-react
+```
+
+Import the component and its stylesheet:
+
+```tsx
+import OrganizationChart from "organization-chart-react";
+import "organization-chart-react/style.css";
+```
+
+## Core API
+
+- `data`: Root `OrganizationChartNode`. Each node requires `title` and may include `id`, `member`, and `children`.
+- `defaultExpandAll`: Optional boolean for the initial branch state. Default: `true`.
+- `onSelect`: Recommended callback. Receives a node or member payload with `kind`, `id`, and a complete tree `path`.
+- `onClickNode`: Legacy-compatible callback. Receives the containing node.
+- `renderNodeTitle`: Custom React renderer for node titles.
+- `renderMember`: Custom React renderer for member rows.
+- `className`: Optional class for the chart root.
+- `ariaLabel`: Accessible chart label. Default: `Organization chart`.
+
+Optional stable `id` values are recommended for nodes and members and should be unique among siblings. Matching IDs in separate branches remain independent because state is keyed by the complete tree path. When IDs are missing, the component uses deterministic position-based paths.
+
+Custom renderers are inserted inside selection buttons and should return presentational content, not nested links, buttons, or form controls.
+
+## Best fit
+
+Use Organization Chart React when a React web application needs a dependency-light, customizable org chart with interactive branches, accessible controls, and TypeScript support.

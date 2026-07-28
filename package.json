@@ -1,22 +1,36 @@
 {
   "name": "organization-chart-react",
-  "version": "1.1.0",
-  "description": "A react component to display organization chart",
+  "version": "1.2.0",
+  "description": "A lightweight, interactive organization chart component for React with collapsible nodes, TypeScript types, custom renderers, and selection events",
   "author": "LeeJams [woals214@gmail.com]",
   "type": "module",
   "main": "./dist/organization-chart-react.umd.cjs",
   "module": "./dist/organization-chart-react.js",
+  "types": "./dist/index.d.ts",
+  "style": "./dist/style.css",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     ".": {
-      "import": "./dist/organization-chart-react.js",
-      "require": "./dist/organization-chart-react.umd.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/organization-chart-react.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/organization-chart-react.umd.cjs"
+      }
+    },
+    "./style.css": {
+      "types": "./dist/stylesheet.d.ts",
+      "default": "./dist/style.css"
     },
     "./dist/style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
+      "types": "./dist/stylesheet.d.ts",
+      "default": "./dist/style.css"
     }
   },
-  "types": "./dist/index.jsx",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LeeJams/Organization-Chart-React"
@@ -42,21 +56,33 @@
   "homepage": "https://leejams.github.io/Organization-Chart-React/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build-bundle": "vite build && vue --emitDeclarationOnly"
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && npm run build-types && vite build --mode lib",
+    "build-demo": "vite build --mode demo",
+    "build-types": "tsc -p tsconfig.build.json",
+    "check": "npm run typecheck && npm test && npm run build && npm run check:consumer && npm run check:pack",
+    "check:consumer": "tsc -p tests/consumer/tsconfig.json",
+    "check:pack": "npm pack --dry-run",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run check:consumer",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+  "peerDependencies": {
+    "react": ">=18.2.0 <20",
+    "react-dom": ">=18.2.0 <20"
   },
   "devDependencies": {
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.3",
-    "eslint": "^8.45.0",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.5"
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "jsdom": "^29.0.2",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10"
   }
 }
