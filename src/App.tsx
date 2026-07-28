@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import OrganizationChart from "./library.js";
+import OrganizationChart from "./index.js";
 import type {
   OrganizationChartNode,
   OrganizationChartSelectPayload,
 } from "./types.js";
+import "./OrganizationChart.css";
 import "./App.css";
 
 const orgData: OrganizationChartNode = {
