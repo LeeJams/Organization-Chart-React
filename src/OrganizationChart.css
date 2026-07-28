@@ -106,10 +106,14 @@
 :where(.org-chart) .org-title:focus-visible,
 :where(.org-chart) .org-content-item:focus-visible,
 :where(.org-chart) .org-extend-arrow:focus-visible {
-  position: relative;
   z-index: 5;
   outline: 3px solid color-mix(in srgb, var(--org-focus) 70%, white);
   outline-offset: -3px;
+}
+
+:where(.org-chart) .org-title:focus-visible,
+:where(.org-chart) .org-content-item:focus-visible {
+  position: relative;
 }
 
 :where(.org-chart) .org-content {
@@ -262,44 +266,35 @@
   height: 28px;
   padding: 0;
   place-items: center;
-  border: 1px solid var(--org-border);
-  border-radius: 999px;
+  border: 0;
   color: var(--org-text-muted);
-  background: var(--org-surface);
-  box-shadow: 0 3px 10px rgb(42 56 88 / 10%);
+  background: transparent;
   font: inherit;
   appearance: none;
   -webkit-appearance: none;
   transform: translateX(-50%);
   cursor: pointer;
-  transition:
-    color 160ms ease,
-    border-color 160ms ease,
-    background-color 160ms ease,
-    transform 180ms ease;
+  transition: color 160ms ease;
 }
 
 :where(.org-chart) .org-extend-arrow::before {
   content: "";
   display: block;
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   box-sizing: border-box;
   border: 2px solid currentColor;
   border-color: currentColor currentColor transparent transparent;
-  transform: translateY(-2px) rotate(135deg);
+  transform: rotate(135deg);
   transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :where(.org-chart) .org-extend .org-extend-arrow::before {
-  transform: translateY(2px) rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 :where(.org-chart) .org-extend-arrow:hover {
-  border-color: var(--org-accent);
-  color: #fff;
-  background: var(--org-accent);
-  transform: translateX(-50%) scale(1.06);
+  color: var(--org-accent);
 }
 
 @keyframes org-node-enter {
